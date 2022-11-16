@@ -1,0 +1,99 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="form-row">
+        <div class="form-group col-3">
+            <label>Name</label>
+            <input type="text" min="5" max="30" formControlName="name" class="form-control" />
+            <div *ngIf="f.name.errors" class="invalid-feedback">
+                <div *ngIf="f.name.errors.required">Name is required</div>
+                <div *ngIf="f.name.errors.pattern">Name must be min 5 characters and maximum 30 characters</div>
+            </div>
+        </div>
+        <div class="form-group col-3">
+            <label>Associate ID</label>
+            <input type="text" min="5" max="30" formControlName="associateid" class="form-control" />
+            <div *ngIf="f.associateid.errors" class="invalid-feedback">
+                <div *ngIf="f.associateid.errors.required">Associate ID is required</div>
+                <div *ngIf="f.associateid.errors.pattern">Associate ID must be min 5 characters and maximum 30 characters and
+                    must starts with CTS</div>
+            </div>
+        </div>
+        <div class="form-group col-3">
+            <label>Skill</label>
+            <select formControlName="techskill" class="dropdown-menu" style="display: block; position: absolute; top:auto">
+                <option class="dropdown-item"  *ngFor="let opt of tskvp" [value]="opt.value" selected="--Select--">{{opt.name}}</option>
+            </select>
+            <div class="invalid-feedback">
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <button [disabled]="loading" class="btn btn-primary" (click)='onSubmit()'>
+            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+            Search
+        </button>
+    </div>
+    <div class="form-row" *ngIf="techskillsData.length > 0">
+        <div class="form-group col-9">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th style="width: 5%">Name</th>
+                        <th style="width: 7%">Associate ID</th>
+                        <th style="width: 5%">Email</th>
+                        <th style="width: 5%">Phone</th>
+                        <th style="width: 18%">Technical Skills</th>
+                        <th style="width: 18%">Non-Technical Skills</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of techskillsData">
+                        <td>{{item.name}}</td>
+                        <td>{{item.associateId}}</td>
+                        <td>{{item.email}}</td>
+                        <td>{{item.phone}}</td>
+                        <td> 
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 1%">Skill Name</th>
+                                        <th style="width: 1%">Expertise Level</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let ts of item.technicalSkill">
+                                        <td>{{ts.skillName}}</td>
+                                        <td>{{ts.expertise}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                        <td>
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 1%">Skill Name</th>
+                                        <th style="width: 1%">Expertise Level</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let ss of item.softSkill">
+                                        <td>{{ss.skillName}}</td>
+                                        <td>{{ss.expertise}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</form>
+<!-- <div class="modal">
+	<div class="modal-overlay" (click)="close($event)"></div>
+	<div class="modal--modal-content">
+		<h2 [innerHTML]="modalTitle"></h2>
+		<div [innerHTML]="modalText"></div>
+		<a class="modal--close-btn" (click)="close($event)">X</a>
+	</div>
+</div> -->

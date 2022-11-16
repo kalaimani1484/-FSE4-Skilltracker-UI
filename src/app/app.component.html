@@ -1,0 +1,16 @@
+<!-- nav -->
+<nav class="navbar navbar-expand navbar-dark bg-dark">
+  <div class="navbar-nav">
+      <a class="nav-item nav-link" [routerLink]="['search']">Search</a>
+      <a class="nav-item nav-link" routerLink="/" routerLinkActive="active"
+          [routerLinkActiveOptions]="{exact: true}" (click)="login()">Login</a>
+      <a class="nav-item nav-link navbar-right pull-right float-right" routerLink="/"
+          routerLinkActive="active" (click)="logout()">Logout</a>
+  </div>
+</nav>
+
+<!-- main app container -->
+<div class="app-container bg-light">
+  <alert></alert>
+  <router-outlet *ngIf="!isIframe"></router-outlet>
+</div>

@@ -1,0 +1,7 @@
+{
+    "/skill-tracker/*": {
+        "target": "http://localhost:53624",
+        "secure": false,
+        "logLevel": "debug"
+    }
+}
